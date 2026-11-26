@@ -300,9 +300,9 @@ async function main() {
   for (const [label, patch] of [
     ['negative sliver', { sliver: -1 }],
     ['negative gold', { gold: -5 }],
-    ['attribute 0', { attribute: 0 }],
-    ['attribute 11', { attribute: 11 }],
-    ['gameLv 3', { gameLv: 3 }],
+    ['attribute -1', { attribute: -1 }],
+    ['attribute 21', { attribute: 21 }],
+    ['gameLv 11', { gameLv: 11 }],
   ]) {
     ok(`applyScalarPatch throws on ${label}`, () => {
       const save = createSampleSave();
@@ -320,6 +320,23 @@ async function main() {
     assert.strictEqual(res.ok, true);
     assert.strictEqual(res.errors.length, 0);
     assert.strictEqual(res.valid, true);
+  });
+
+  ok('validateSave tolerates real-save edge values with warnings (attribute 0/12, gameLv 3, HP -5, baoShi -1)', () => {
+    const s = createSampleSave();
+    s.attribute = 0;
+    s.gameLv = 3;
+    s.HP = -5;
+    s.baoShi = -1;
+    const r = validateSave(s);
+    assert.strictEqual(r.ok, true, JSON.stringify(r.errors));
+    assert.ok(r.warnings.length >= 4, JSON.stringify(r.warnings));
+
+    const sDlc = createSampleSave();
+    sDlc.attribute = 12;
+    const rDlc = validateSave(sDlc);
+    assert.strictEqual(rDlc.ok, true);
+    assert.ok(rDlc.warnings.length >= 1);
   });
 
   ok('validateSave negative sliver / invalid attribute -> ok false', () => {

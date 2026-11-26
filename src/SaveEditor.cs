@@ -23,7 +23,7 @@ namespace PathOfKungFuSaveEditor
 
         private static readonly string RuntimeDir = Path.Combine(
             Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData),
-            "PathOfKungFuSaveEditor", "runtime-1.0");
+            "PathOfKungFuSaveEditor", "runtime-1.0.1");
 
         [STAThread]
         private static int Main(string[] args)
@@ -141,7 +141,7 @@ namespace PathOfKungFuSaveEditor
         internal static string LoadHtml()
         {
             Assembly asm = Assembly.GetExecutingAssembly();
-            using (Stream s = asm.GetManifestResourceStream("PathOfKungFuSaveEditor-v1.0.html"))
+            using (Stream s = asm.GetManifestResourceStream("PathOfKungFuSaveEditor-v1.0.1.html"))
             {
                 if (s == null) throw new InvalidOperationException("html resource missing");
                 using (StreamReader r = new StreamReader(s, Encoding.UTF8))

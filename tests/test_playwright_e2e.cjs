@@ -16,7 +16,7 @@ const http = require('http');
 const { spawn, spawnSync } = require('child_process');
 
 const REPO = path.resolve(__dirname, '..');
-const DIST_HTML = path.join(REPO, 'dist', 'PathOfKungFuSaveEditor-v1.0.html');
+const DIST_HTML = path.join(REPO, 'dist', 'PathOfKungFuSaveEditor-v1.0.1.html');
 const CODEC_JS = path.join(REPO, 'src', 'pokf-codec.js'); // PokfCodec (may be .js or .cjs)
 const CODEC_CJS = path.join(REPO, 'pokf_codec.cjs');
 const SERVE_PY = path.join(REPO, 'pokf_editor.py');

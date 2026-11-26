@@ -263,7 +263,10 @@ internal static class SaveStoreTests
     {
         AssertThrows<InvalidDataException>(delegate { SaveStore.ValidateSaveJson(MakeValidJsonWithSliver(-1)); }, "negative sliver");
         AssertThrows<InvalidDataException>(delegate { SaveStore.ValidateSaveJson(MakeValidJsonWithAttribute(99)); }, "out-of-range attribute 99");
-        AssertThrows<InvalidDataException>(delegate { SaveStore.ValidateSaveJson(MakeValidJsonWithGameLv(5)); }, "out-of-range gameLv 5");
+        AssertThrows<InvalidDataException>(delegate { SaveStore.ValidateSaveJson(MakeValidJsonWithGameLv(99)); }, "out-of-range gameLv 99");
+        SaveStore.ValidateSaveJson(MakeValidJsonWithAttribute(0));
+        SaveStore.ValidateSaveJson(MakeValidJsonWithAttribute(12));
+        SaveStore.ValidateSaveJson(MakeValidJsonWithGameLv(3));
 
         string trailingGarbage = MakeValidJson() + " trailing";
         AssertThrows<InvalidDataException>(delegate { SaveStore.ValidateSaveJson(trailingGarbage); }, "trailing garbage after JSON object");

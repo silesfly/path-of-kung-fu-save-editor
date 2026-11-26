@@ -243,7 +243,7 @@
     }
 
     var nonNegativeFields = [
-      'sliver', 'gold', 'sectcoin', 'gangCoin', 'xiuWei', 'YueLi', 'JingYan', 'SP', 'HP', 'baoShi',
+      'sliver', 'gold', 'sectcoin', 'gangCoin', 'xiuWei', 'YueLi', 'JingYan', 'SP',
       'ArrestNum', 'surplusAttributeNum'
     ];
     for (var i = 0; i < nonNegativeFields.length; i++) {
@@ -257,15 +257,31 @@
       }
     }
 
+    var warnOnNegativeFields = ['HP', 'baoShi'];
+    for (var w = 0; w < warnOnNegativeFields.length; w++) {
+      var wField = warnOnNegativeFields[w];
+      if (root[wField] !== undefined) {
+        if (!isFiniteNumber(root[wField])) {
+          errors.push(wField + ' 값이 숫자가 아닙니다.');
+        } else if (root[wField] < 0) {
+          warnings.push(wField + ' 값이 음수입니다.');
+        }
+      }
+    }
+
     if (root.attribute !== undefined) {
-      if (!isIntegerNumber(root.attribute) || root.attribute < 1 || root.attribute > 10) {
-        errors.push('경지 값은 1부터 10 사이의 정수여야 합니다.');
+      if (!isIntegerNumber(root.attribute) || root.attribute < 0 || root.attribute > 50) {
+        errors.push('경지 값은 0부터 50 사이의 정수여야 합니다.');
+      } else if (root.attribute < 1 || root.attribute > 10) {
+        warnings.push('경지 값이 기본 범위(1~10) 밖입니다: ' + root.attribute);
       }
     }
 
     if (root.gameLv !== undefined) {
-      if (!isIntegerNumber(root.gameLv) || root.gameLv < 0 || root.gameLv > 2) {
-        errors.push('난이도 값은 0부터 2 사이의 정수여야 합니다.');
+      if (!isIntegerNumber(root.gameLv) || root.gameLv < 0 || root.gameLv > 10) {
+        errors.push('난이도 값은 0부터 10 사이의 정수여야 합니다.');
+      } else if (root.gameLv > 2) {
+        warnings.push('난이도 값이 기본 범위(0~2) 밖입니다: ' + root.gameLv);
       }
     }
 
@@ -341,14 +357,14 @@
     }
 
     if (patch.attribute !== undefined) {
-      if (typeof patch.attribute !== 'number' || !isFinite(patch.attribute) || Math.floor(patch.attribute) !== patch.attribute || patch.attribute < 1 || patch.attribute > 10) {
-        throw new Error('경지 값은 1부터 10 사이의 정수여야 합니다.');
+      if (typeof patch.attribute !== 'number' || !isFinite(patch.attribute) || Math.floor(patch.attribute) !== patch.attribute || patch.attribute < 0 || patch.attribute > 20) {
+        throw new Error('경지 값은 0부터 20 사이의 정수여야 합니다.');
       }
     }
 
     if (patch.gameLv !== undefined) {
-      if (typeof patch.gameLv !== 'number' || !isFinite(patch.gameLv) || Math.floor(patch.gameLv) !== patch.gameLv || patch.gameLv < 0 || patch.gameLv > 2) {
-        throw new Error('난이도 값은 0부터 2 사이의 정수여야 합니다.');
+      if (typeof patch.gameLv !== 'number' || !isFinite(patch.gameLv) || Math.floor(patch.gameLv) !== patch.gameLv || patch.gameLv < 0 || patch.gameLv > 10) {
+        throw new Error('난이도 값은 0부터 10 사이의 정수여야 합니다.');
       }
     }
 

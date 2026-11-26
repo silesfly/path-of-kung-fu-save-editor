@@ -1,11 +1,11 @@
-# 도검강호로 세이브 에디터 v1.0
+# 도검강호로 세이브 에디터 v1.0.1
 
 *도검강호로* (`daojianjianghulu`, Steam AppID `2361680`) 전용 오프라인 세이브 에디터입니다.  
 게임 바이너리 역공학(REA)으로 검증된 `PlayerData_<슬롯>.save` 포맷(`LEB128` + `KeyPlayerDatammjh2023<ID>` + `Raw DEFLATE` + UTF-8/UTF-16LE JSON)을 손실 없이 읽고 기록합니다.
 
 ## 3가지 실행 방식
 
-1. **단일 HTML 오프라인 웹 앱** (`dist/PathOfKungFuSaveEditor-v1.0.html`)
+1. **단일 HTML 오프라인 웹 앱** (`dist/PathOfKungFuSaveEditor-v1.0.1.html`)
    - 외부 네트워크 연결이 완전히 차단된 단일 HTML 파일입니다(`connect-src 'none'`).
    - 브라우저에서 바로 열어 `.save` 파일을 불러오거나 샘플 데이터를 편집해 새 `.save` 파일로 내려받을 수 있습니다.
    - 6개 키보드 접근성 탭(`기본·재화`, `능력·전투`, `특성·경맥`, `무학·심결`, `소지품·장비`, `동료·검증`), 빠른 프리셋 6종, 자동/밝게/어둡게 테마 전환을 제공합니다.
@@ -13,7 +13,7 @@
    - 외부 패키지 설치 없이 Python 3 표준 라이브러리만으로 동작합니다.
    - `discover`, `inspect`, `validate`, `presets`, `apply`, `restore`, `demo`, `serve` 명령을 지원합니다.
    - `python3 pokf_editor.py serve --open-browser` 실행 시 `127.0.0.1` 전용 서버와 `X-Pokf-Token` CSRF 보호를 통해 저장 폴더 자동 탐색·백업·복원을 수행합니다.
-3. **Windows 독립 실행형 데스크톱 앱** (`dist/PathOfKungFuSaveEditor-v1.0.exe`)
+3. **Windows 독립 실행형 데스크톱 앱** (`dist/PathOfKungFuSaveEditor-v1.0.1.exe`)
    - `.NET Framework 4.8` + `WebView2` 기반 64비트 실행 파일입니다.
    - 기본 저장 폴더(`%USERPROFILE%\AppData\LocalLow\HuaLongZ\saves\`)를 자동 탐색하며 `WebView2` 설정에서 개발자 도구·호스트 객체·외부 탐색을 차단합니다.
 

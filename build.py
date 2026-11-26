@@ -14,7 +14,7 @@ ROOT = Path(__file__).resolve().parent
 SRC_DIR = ROOT / "src"
 DIST_DIR = ROOT / "dist"
 PAGE_PATH = SRC_DIR / "editor-page.html"
-OUT_PATH = DIST_DIR / "PathOfKungFuSaveEditor-v1.0.html"
+OUT_PATH = DIST_DIR / "PathOfKungFuSaveEditor-v1.0.1.html"
 
 MAX_SIZE = 10 * 1024 * 1024
 

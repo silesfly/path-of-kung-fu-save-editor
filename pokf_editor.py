@@ -273,7 +273,7 @@ def validate_schema(d: Any) -> None:
     non_negative_fields = (
         "sliver", "gold", "sectcoin", "gangCoin",
         "xiuWei", "YueLi", "JingYan", "SP",
-        "HP", "baoShi", "ArrestNum", "surplusAttributeNum",
+        "ArrestNum", "surplusAttributeNum",
     )
     for k in non_negative_fields:
         if k in d:
@@ -282,14 +282,19 @@ def validate_schema(d: Any) -> None:
                 raise ValueError(f"{k} 항목이 숫자가 아닙니다.")
             if v < 0:
                 raise ValueError(f"{k} 항목은 0 이상이어야 합니다.")
+    for k in ("HP", "baoShi"):
+        if k in d:
+            v = d[k]
+            if isinstance(v, bool) or not isinstance(v, (int, float)):
+                raise ValueError(f"{k} 항목이 숫자가 아닙니다.")
     if "attribute" in d:
         attr = d["attribute"]
-        if isinstance(attr, bool) or not isinstance(attr, int) or not 1 <= attr <= 10:
-            raise ValueError("attribute 항목이 1~10 범위가 아닙니다.")
+        if isinstance(attr, bool) or not isinstance(attr, int) or not 0 <= attr <= 50:
+            raise ValueError("attribute 항목이 0~50 범위가 아닙니다.")
     if "gameLv" in d:
         lv = d["gameLv"]
-        if isinstance(lv, bool) or not isinstance(lv, int) or not 0 <= lv <= 2:
-            raise ValueError("gameLv 항목이 0~2 범위가 아닙니다.")
+        if isinstance(lv, bool) or not isinstance(lv, int) or not 0 <= lv <= 10:
+            raise ValueError("gameLv 항목이 0~10 범위가 아닙니다.")
 
 # ---------------------------------------------------------------------------
 # 백업
@@ -658,7 +663,7 @@ class PokfHandler(BaseHTTPRequestHandler):
     def _serve_index(self) -> None:
         csp = ("default-src 'none'; script-src 'unsafe-inline'; style-src 'unsafe-inline'; "
                "img-src data: blob:; connect-src 'self'; base-uri 'none'; form-action 'none'")
-        dist = Path(__file__).with_name("dist") / "PathOfKungFuSaveEditor-v1.0.html"
+        dist = Path(__file__).with_name("dist") / "PathOfKungFuSaveEditor-v1.0.1.html"
         raw: Optional[bytes] = None
         if dist.is_file():
             raw = dist.read_bytes()

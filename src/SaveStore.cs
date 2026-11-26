@@ -499,8 +499,8 @@ namespace PathOfKungFuSaveEditor
             CheckNonNegative(dict, "xiuWei");
             CheckNonNegative(dict, "ArrestNum");
 
-            CheckRange(dict, "attribute", 1, 10);
-            CheckRange(dict, "gameLv", 0, 2);
+            CheckRange(dict, "attribute", 0, 50);
+            CheckRange(dict, "gameLv", 0, 10);
         }
 
         public static void NoLinks(string path)
